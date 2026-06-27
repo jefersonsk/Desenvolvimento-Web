@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instituto Aragão - Pesquisa de Cursos</title>
+    <link rel="stylesheet" href="estilo.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo-container">
+        <img src="icone.png" alt="Ícone do Instituto" />
+        <span class="logo-text">Instituto Aragão de Ensino Superior</span>
+      </div>
+
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#sobre">Sobre o Instituto</a></li>
+          <li><a href="cursos.html" class="active">Cursos</a></li>
+          <li><a href="#estudante">Estudante</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <header class="banner-principal">
+  <div class="banner-overlay"></div>
+  <h1 class="banner-titulo">Instituto Aragão de Ensino Superior</h1>
+</header>
+
+    <main class="content-container">
+      <h1 class="titulo-institucional">Pesquisa de Cursos</h1>
+
+      <form id="form-pesquisa" class="search-form">
+        <label for="busca-curso">Palavra-chave:</label>
+        <input 
+          type="text" 
+          id="busca-curso" 
+          placeholder="Ex: Análise, Técnico, Integrado..." 
+        />
+        <button type="submit" id="btn-filtrar">Filtrar</button>
+      </form>
+
+      <form id="form-resultado" class="result-form" action="proxima_pagina.html" method="GET">
+        <div class="table-container">
+          <table id="tabela-cursos">
+            <thead>
+              <tr>
+                <th>Seleção</th>
+                <th>Código</th>
+                <th>Nome do Curso</th>
+                <th>Eixo / Modalidade</th>
+              </tr>
+            </thead>
+            <tbody id="dados-tabela">
+              <tr>
+                <td colspan="4" class="sem-dados">Digite um termo e clique em Filtrar.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <button type="submit" id="btn-atualizar">Atualizar</button>
+      </form>
+    </main>
+
+    <script>
+      const formPesquisa = document.getElementById('form-pesquisa');
+      const campoBusca = document.getElementById('busca-curso');
+      const dadosTabela = document.getElementById('dados-tabela');
+      const formResultado = document.getElementById('form-resultado');
+
+      // 1. Consumo do Serviço Web via API Fetch ao clicar em Filtrar
+      formPesquisa.addEventListener('submit', function(event) {
+        event.preventDefault(); // Impede o recarregamento da página
+        
+        const termoBusca = encodeURIComponent(campoBusca.value.trim());
+        const url = `https://ingresso.ifrs.edu.br/prematricula/ws/listarCursosIW20242.php?curso=${termoBusca}`;
+
+        dadosTabela.innerHTML = '<tr><td colspan="4" class="sem-dados">Buscando cursos...</td></tr>';
+
+        fetch(url)
+          .then(response => {
+            if (!response.ok) throw new Error('Erro na requisição.');
+            return response.json();
+          })
+          .then(data => {
+            dadosTabela.innerHTML = ''; // Limpa a tabela
+
+            if (!data || data.length === 0) {
+              dadosTabela.innerHTML = '<tr><td colspan="4" class="sem-dados">Nenhum curso encontrado.</td></tr>';
+              return;
+            }
+
+            // Popula as linhas dinamicamente (ajuste as chaves conforme o JSON real do IFRS)
+            data.forEach((curso, index) => {
+              const row = document.createElement('tr');
+              
+              // Ajuste o nome dos atributos (ex: curso.id, curso.nome) se o JSON retornado usar outras nomenclaturas
+              row.innerHTML = `
+                <td><input type="radio" name="cursoSelecionado" value="${curso.id || index}"></td>
+                <td>${curso.id || index + 1}</td>
+                <td><strong>${curso.nome || curso.curso || 'Não informado'}</strong></td>
+                <td>${curso.modalidade || curso.eixo || '-'}</td>
+              `;
+              dadosTabela.appendChild(row);
+            });
+          })
+          .catch(error => {
+            console.error(error);
+            dadosTabela.innerHTML = '<tr><td colspan="4" class="sem-dados" style="color: red;">Erro ao carregar dados do servidor do IFRS.</td></tr>';
+          });
+      });
+
+      // 2. Validação do Radio Button ao clicar em Atualizar
+      formResultado.addEventListener('submit', function(event) {
+        // Busca qual radiobutton com o name 'cursoSelecionado' está marcado
+        const radioMarcado = document.querySelector('input[name="cursoSelecionado"]:checked');
+
+        if (!radioMarcado) {
+          event.preventDefault(); // Impede o envio do formulário / ir para a próxima página
+          alert('Por favor, selecione um curso utilizando o botão de seleção antes de clicar em Atualizar.');
+        }
+      });
+    </script>
+  </body>
+</html>

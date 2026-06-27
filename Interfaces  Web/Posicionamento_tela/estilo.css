@@ -1,0 +1,26 @@
+#banner {
+    position: absolute;
+    left: 10%;
+    top: 0px;
+    width: 80%
+    border
+}
+
+
+#titulo_1 {
+    position: absolute;
+    left: 20%;
+    top: 150px 
+}
+
+#titulo_2 {
+    position: absolute;
+    left: 50%;
+    top: 150px
+}
+
+#titulo_3 {
+    position: absolute;
+    left: 70%;
+    top: 150px
+}

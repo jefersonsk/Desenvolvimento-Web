@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instituto Aragão - Formulário do Aluno</title>
+    <link rel="stylesheet" href="estilo.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo-container">
+        <img src="icone.png" alt="Ícone do Instituto" />
+        <span class="logo-text">Instituto Aragão de Ensino Superior</span>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#sobre">Sobre o Instituto</a></li>
+          <li><a href="cursos.html">Cursos</a></li>
+          <li><a href="alunos.html" class="active">Estudante</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <header class="banner-principal">
+      <div class="banner-overlay"></div>
+      <h1 class="banner-titulo">Instituto Aragão de Ensino Superior</h1>
+    </header>
+
+    <main class="content-container">
+      <h1 class="titulo-institucional">Cadastro de Aluno</h1>
+
+      <form id="form-aluno" class="form-cadastro" action="salvar_aluno.php" method="POST">
+        
+        <div class="form-group">
+          <label for="matricula">Número de Matrícula: <span class="obrigatorio">*</span></label>
+          <input type="text" id="matricula" name="matricula" placeholder="Ex: 22.123456" maxlength="9" required aria-required="true" />
+        </div>
+
+        <div class="form-group">
+          <label for="nome-aluno">Nome Completo: <span class="obrigatorio">*</span></label>
+          <input type="text" id="nome-aluno" name="nome" maxlength="100" required aria-required="true" />
+        </div>
+
+        <div class="form-group">
+          <label for="cpf-aluno">CPF: <span class="obrigatorio">*</span></label>
+          <input type="text" id="cpf-aluno" name="cpf" placeholder="XXX.XXX.XXX-XX" maxlength="14" required aria-required="true" />
+        </div>
+
+        <fieldset class="form-group-fieldset">
+          <legend>Sexo:</legend>
+          <div class="radio-option">
+            <input type="radio" id="sexo-m" name="sexo" value="M" checked />
+            <label for="sexo-m">Masculino</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="sexo-f" name="sexo" value="F" />
+            <label for="sexo-f">Feminino</label>
+          </div>
+        </fieldset>
+
+        <div class="form-group">
+          <label for="data-nasc">Data de Nascimento: <span class="obrigatorio">*</span></label>
+          <input type="date" id="data-nasc" name="data_nascimento" required aria-required="true" />
+        </div>
+
+        <fieldset class="form-group-fieldset">
+          <legend>Dados de Endereço</legend>
+          <div class="cep-search-container">
+            <div class="form-group" style="flex: 1; margin-bottom: 0;">
+              <label for="cep-aluno">CEP (Apenas numbers): <span class="obrigatorio">*</span></label>
+              <input type="text" id="cep-aluno" name="cep" maxlength="8" required aria-required="true" placeholder="Ex: 90620160" />
+            </div>
+            <button type="button" id="btn-consultar-cep">Consultar CEP</button>
+          </div>
+
+          <div class="form-group">
+            <label for="logradouro">Logradouro:</label>
+            <input type="text" id="logradouro" name="logradouro" readonly tabindex="-1" class="input-readonly" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex: 1;">
+              <label for="numero-end">Número: <span class="obrigatorio">*</span></label>
+              <input type="text" id="numero-end" name="numero" maxlength="5" required aria-required="true" />
+            </div>
+            <div class="form-group" style="flex: 2;">
+              <label for="complemento-end">Complemento:</label>
+              <input type="text" id="complemento-end" name="complemento" maxlength="30" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" name="bairro" readonly tabindex="-1" class="input-readonly" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex: 3;">
+              <label for="cidade">Cidade:</label>
+              <input type="text" id="cidade" name="cidade" readonly tabindex="-1" class="input-readonly" />
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label for="estado">Estado:</label>
+              <input type="text" id="estado" name="estado" readonly tabindex="-1" class="input-readonly" />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-group-fieldset">
+          <legend>Associação de Cursos no IFRS: <span class="obrigatorio">*</span></legend>
+          <p class="instrucoes-associacao">Selecione os cursos na caixa da esquerda e use os botões para mover à direita.</p>
+          
+          <div class="dual-list-container">
+            <div class="list-box">
+              <label for="cursos-disponiveis">Cursos Disponíveis</label>
+              <select id="cursos-disponiveis" multiple size="8"></select>
+            </div>
+
+            <div class="list-actions">
+              <button type="button" id="move-right" title="Adicionar selecionados">&gt;</button>
+              <button type="button" id="move-left" title="Remover selecionados">&lt;</button>
+            </div>
+
+            <div class="list-box">
+              <label for="cursos-associados">Cursos Vinculados ao Aluno</label>
+              <select id="cursos-associados" name="cursos_vinculados[]" multiple size="8" required aria-required="true"></select>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" id="btn-salvar-aluno">Salvar</button>
+          <button type="reset" id="btn-cancelar-aluno">Cancelar</button>
+        </div>
+      </form>
+    </main>
+
+    <script>
+      const form = document.getElementById('form-aluno');
+      const inputMatricula = document.getElementById('matricula');
+      const inputNome = document.getElementById('nome-aluno');
+      const inputCpf = document.getElementById('cpf-aluno');
+      const inputDataNasc = document.getElementById('data-nasc');
+      const inputCep = document.getElementById('cep-aluno');
+      const btnCep = document.getElementById('btn-consultar-cep');
+      
+      // Inputs de endereço para preenchimento automático
+      const inputLogradouro = document.getElementById('logradouro');
+      const inputBairro = document.getElementById('bairro');
+      const inputCidade = document.getElementById('cidade');
+      const inputEstado = document.getElementById('estado');
+
+      // Elementos do componente Associação
+      const selectDisponiveis = document.getElementById('cursos-disponiveis');
+      const selectAssociados = document.getElementById('cursos-associados');
+      const btnRight = document.getElementById('move-right');
+      const btnLeft = document.getElementById('move-left');
+
+      // 1. Transformação dinâmica em Caixa Alta para o Nome
+      inputNome.addEventListener('input', function() {
+        this.value = this.value.toUpperCase();
+      });
+
+      // 2. Máscara e Validação de Entrada da Matrícula (Formato XX.XXXXXX)
+      inputMatricula.addEventListener('input', function() {
+        let v = this.value.replace(/\D/g, "");
+        if (v.length > 2) v = v.substring(0,2) + "." + v.substring(2,8);
+        this.value = v;
+      });
+
+      // 3. Máscara de Entrada para o CPF (Formato XXX.XXX.XXX-XX) Corrigida e Fluida
+      inputCpf.addEventListener('input', function() {
+        let v = this.value.replace(/\D/g, "");
+        if (v.length > 9) {
+          v = v.replace(/^(\d{3})(\d{3})(\d{3})(\d{1,2})$/, "$1.$2.$3-$4");
+        } else if (v.length > 6) {
+          v = v.replace(/^(\d{3})(\d{3})(\d{1,3})$/, "$1.$2.$3");
+        } else if (v.length > 3) {
+          v = v.replace(/^(\d{3})(\d{1,3})$/, "$1.$2");
+        }
+        this.value = v;
+      });
+
+      // 4. Somente Números no campo CEP
+      inputCep.addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g, "");
+      });
+
+      // 5. Integração com o WebService da API ViaCEP
+      btnCep.addEventListener('click', () => {
+        const cep = inputCep.value.trim();
+        if (cep.length !== 8) {
+          alert('Por favor, informe um CEP válido contendo exatamente 8 dígitos numéricos.');
+          return;
+        }
+
+        inputLogradouro.value = "Buscando...";
+        inputBairro.value = "Buscando...";
+        inputCidade.value = "Buscando...";
+        inputEstado.value = "Buscando...";
+
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+          .then(res => res.json())
+          .then(dados => {
+            if (dados.erro) {
+              alert('CEP não localizado.');
+              limparCamposEndereco();
+            } else {
+              inputLogradouro.value = dados.logradouro || '';
+              inputBairro.value = dados.bairro || '';
+              inputCidade.value = dados.localidade || '';
+              inputEstado.value = dados.uf || '';
+            }
+          })
+          .catch(() => {
+            alert('Falha ao consultar o serviço de CEP.');
+            limparCamposEndereco();
+          });
+      });
+
+      function limparCamposEndereco() {
+        inputLogradouro.value = ''; 
+        inputBairro.value = ''; 
+        inputCidade.value = ''; 
+        inputEstado.value = '';
+      }
+
+      // Evento disparado ao resetar o formulário manualmente
+      form.addEventListener('reset', () => {
+        limparCamposEndereco();
+      });
+
+      // 6. Carga do Serviço Web de Cursos do IFRS para o campo Associação
+      window.addEventListener('DOMContentLoaded', () => {
+        fetch('https://ingresso.ifrs.edu.br/prematricula/ws/listarCursosIW20242.php')
+          .then(res => res.json())
+          .then(cursos => {
+            selectDisponiveis.innerHTML = '';
+            cursos.forEach(curso => {
+              const opt = document.createElement('option');
+              opt.value = curso.codigo || curso.id;
+              opt.textContent = curso.nome || curso.curso;
+              selectDisponiveis.appendChild(opt);
+            });
+          })
+          .catch(() => {
+            console.error("Erro ao popular o catálogo de cursos IFRS.");
+            selectDisponiveis.innerHTML = '<option disabled>Erro ao carregar cursos</option>';
+          });
+      });
+
+      // Lógica de manipulação de itens da Associação (Dual List)
+      btnRight.addEventListener('click', () => moverItens(selectDisponiveis, selectAssociados));
+      btnLeft.addEventListener('click', () => moverItens(selectAssociados, selectDisponiveis));
+
+      function moverItens(origem, destino) {
+        const selecionados = Array.from(origem.selectedOptions);
+        selecionados.forEach(opt => {
+          destino.appendChild(opt);
+          opt.selected = false;
+        });
+      }
+
+      // 7. Algoritmo Oficial de Validação do CPF da Receita Federal
+      function validaCPF(cpf) {
+        cpf = cpf.replace(/[^\d]+/g, '');
+        if (cpf.length !== 11 || !!cpf.match(/^(\d)\1{10}$/)) return false;
+        
+        let soma = 0, resto;
+        for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+        resto = (soma * 10) % 11;
+        if ((resto === 10) || (resto === 11)) resto = 0;
+        if (resto !== parseInt(cpf.substring(9, 10))) return false;
+        
+        soma = 0;
+        for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+        resto = (soma * 10) % 11;
+        if ((resto === 10) || (resto === 11)) resto = 0;
+        return resto === parseInt(cpf.substring(10, 11));
+      }
+
+      // 8. Validação Geral do Formulário no Evento Submit (Salvar)
+      form.addEventListener('submit', function(event) {
+        // Validação da máscara da Matrícula
+        const regexMatricula = /^\d{2}\.\d{6}$/;
+        if (!regexMatricula.test(inputMatricula.value)) {
+          event.preventDefault();
+          alert('A Matrícula deve obrigatoriamente seguir o formato XX.XXXXXX');
+          inputMatricula.focus();
+          return;
+        }
+
+        // Validação Matemática do CPF
+        if (!validaCPF(inputCpf.value)) {
+          event.preventDefault();
+          alert('Algoritmo de Segurança: O número de CPF informado é inválido de acordo com a Receita Federal.');
+          inputCpf.focus();
+          return;
+        }
+
+        // Validação de preenchimento da Data de Nascimento
+        if (!inputDataNasc.value) {
+          event.preventDefault();
+          alert('Por favor, insira a data de nascimento.');
+          inputDataNasc.focus();
+          return;
+        }
+
+        // Validação da Idade Mínima de 14 Anos
+        const dataNasc = new Date(inputDataNasc.value);
+        const hoje = new Date();
+        let idade = hoje.getFullYear() - dataNasc.getFullYear();
+        const m = hoje.getMonth() - dataNasc.getMonth();
+        if (m < 0 || (m === 0 && hoje.getDate() < dataNasc.getDate())) {
+          idade--;
+        }
+
+        if (idade < 14) {
+          event.preventDefault();
+          alert('Incompatibilidade cadastral: O Instituto não admite matrículas de alunos menores de 14 anos.');
+          inputDataNasc.focus();
+          return;
+        }
+
+        // Validação de consulta prévia do Endereço
+        if (!inputLogradouro.value || inputLogradouro.value === "Buscando...") {
+          event.preventDefault();
+          alert('Por favor, informe um CEP válido e clique em "Consultar CEP" antes de salvar.');
+          inputCep.focus();
+          return;
+        }
+
+        // Validação da Caixa de Associação (Mínimo de 1 curso selecionado)
+        if (selectAssociados.options.length === 0) {
+          event.preventDefault();
+          alert('O aluno deve estar associado a pelo menos um curso.');
+          selectDisponiveis.focus();
+          return;
+        }
+
+        // Requisito Técnico Crucial: Para os valores do select múltiplo serem enviados no POST,
+        // eles precisam estar todos implicitamente selecionados no momento do disparo do formulário.
+        Array.from(selectAssociados.options).forEach(opt => opt.selected = true);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instituto Aragão - Pesquisa de Alunos</title>
+    <link rel="stylesheet" href="estilo.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo-container">
+        <img src="icone.png" alt="Ícone do Instituto" />
+        <span class="logo-text">Instituto Aragão de Ensino Superior</span>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#sobre">Sobre o Instituto</a></li>
+          <li><a href="cursos.html">Cursos</a></li>
+          <li><a href="alunos.html" class="active">Estudante</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <header class="banner-principal">
+  <div class="banner-overlay"></div>
+  <h1 class="banner-titulo">Instituto Aragão de Ensino Superior</h1>
+</header>
+
+    <main class="content-container">
+      <h1 class="titulo-institucional">Pesquisa de Alunos</h1>
+
+      <form id="form-pesquisa-aluno" class="search-form">
+        <label for="busca-aluno">Nome do Aluno:</label>
+        <input 
+          type="text" 
+          id="busca-aluno" 
+          placeholder="Ex: Carlos, Maria, Silva..." 
+        />
+        <button type="submit" id="btn-filtrar-aluno">Filtrar</button>
+      </form>
+
+      <div class="action-bar">
+        <a href="cadastro_aluno.html" id="btn-inserir-aluno">Inserir Novo Aluno</a>
+      </div>
+
+      <div class="table-container">
+        <table id="tabela-alunos" class="display">
+          <thead>
+            <tr>
+              <th>Seleção</th>
+              <th>Matrícula</th>
+              <th>Nome do Aluno</th>
+              <th>Curso</th>
+            </tr>
+          </thead>
+          <tbody id="dados-alunos">
+            <tr>
+              <td colspan="4" class="sem-dados">Digite o nome de um estudante e clique em Filtrar.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    <script>
+      const formPesquisa = document.getElementById('form-pesquisa-aluno');
+      const campoBusca = document.getElementById('busca-aluno');
+      let dataTableInstance = null;
+
+      // Função para destruir instância anterior do DataTables (necessário para remontar a tabela com novos dados)
+      function inicializarOuAtualizarDataTables() {
+        if (dataTableInstance) {
+          dataTableInstance.destroy();
+        }
+        
+        // Inicializa o DataTables aplicando as regras do requisito
+        dataTableInstance = $('#tabela-alunos').DataTable({
+          "pageLength": 10,      // Regra: Paginação de 10 em 10 alunos
+          "searching": false,    // Desativa a barra de busca interna do datatables (usaremos o nosso formulário)
+          "lengthChange": false, // Trava a exibição estrita em 10 itens por página
+          "ordering": true,      // Regra: Possibilidade de alterar a ordenação clicando na coluna
+          "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.13.7/i18n/pt-BR.json" // Tradução para Português
+          }
+        });
+      }
+
+      // Consumo do Serviço Web via Fetch API
+      formPesquisa.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const termoBusca = encodeURIComponent(campoBusca.value.trim());
+        const url = `https://ingresso.ifrs.edu.br/prematricula/ws/listarAlunosIW20242.php?nome=${termoBusca}`;
+
+        const tbody = document.getElementById('dados-alunos');
+        tbody.innerHTML = '<tr><td colspan="4" class="sem-dados">Buscando registros...</td></tr>';
+
+        // Destrói temporariamente o DataTables para manipulação limpa do DOM
+        if (dataTableInstance) {
+          dataTableInstance.destroy();
+          dataTableInstance = null;
+        }
+
+        fetch(url)
+          .then(response => {
+            if (!response.ok) throw new Error('Erro na requisição.');
+            return response.json();
+          })
+          .then(data => {
+            tbody.innerHTML = ''; // Limpa o corpo da tabela
+
+            if (!data || data.length === 0) {
+              tbody.innerHTML = '<tr><td colspan="4" class="sem-dados">Nenhum aluno localizado.</td></tr>';
+              return;
+            }
+
+            // Alimenta as linhas da tabela dinamicamente a partir do JSON recebido
+            data.forEach((aluno, index) => {
+              const row = document.createElement('tr');
+              
+              // Mapeamento baseado nas propriedades padrões do IFRS para estruturas de Alunos
+              row.innerHTML = `
+                <td><input type="radio" name="alunoSelecionado" value="${aluno.id || index}"></td>
+                <td>${aluno.id || aluno.matricula || index + 1000}</td>
+                <td><strong>${aluno.nome || 'Não informado'}</strong></td>
+                <td>${aluno.curso || '-'}</td>
+              `;
+              tbody.appendChild(row);
+            });
+
+            // Aplica as propriedades de Paginação e Ordenação nas novas linhas injetadas
+            inicializarOuAtualizarDataTables();
+          })
+          .catch(error => {
+            console.error(error);
+            tbody.innerHTML = '<tr><td colspan="4" class="sem-dados" style="color: #dc3545;">Erro ao carregar dados do servidor do IFRS.</td></tr>';
+          });
+      });
+    </script>
+  </body>
+</html>

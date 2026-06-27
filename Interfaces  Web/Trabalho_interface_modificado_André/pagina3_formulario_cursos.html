@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instituto Aragão - Formulário do Curso</title>
+    <link rel="stylesheet" href="estilo.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo-container">
+        <img src="icone.png" alt="Ícone do Instituto" />
+        <span class="logo-text">Instituto Aragão de Ensino Superior</span>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#sobre">Sobre o Instituto</a></li>
+          <li><a href="cursos.html" class="active">Cursos</a></li>
+          <li><a href="#estudante">Estudante</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <header class="banner-principal">
+  <div class="banner-overlay"></div>
+  <h1 class="banner-titulo">Instituto Aragão de Ensino Superior</h1>
+</header>
+
+    <main class="content-container">
+      <h1 class="titulo-institucional">Cadastro / Atualização de Curso</h1>
+
+      <form id="form-curso" class="form-cadastro" action="salvar_curso.php" method="POST">
+        
+        <div class="form-group">
+          <label for="nome-curso">Nome do Curso: <span class="obrigatorio">*</span></label>
+          <input 
+            type="text" 
+            id="nome-curso" 
+            name="nome" 
+            maxlength="100" 
+            required 
+            aria-required="true"
+            placeholder="Ex: ANÁLISE E DESENVOLVIMENTO DE SISTEMAS"
+          />
+        </div>
+
+        <fieldset class="form-group-fieldset">
+          <legend>Modalidade: <span class="obrigatorio">*</span></legend>
+          
+          <div class="radio-option">
+            <input type="radio" id="mod-integrado" name="modalidade" value="INTEGRADO" required aria-required="true" />
+            <label for="mod-integrado">Técnico Integrado ao Ensino Médio</label>
+          </div>
+          
+          <div class="radio-option">
+            <input type="radio" id="mod-concomitante" name="modalidade" value="CONCOMITANTE" />
+            <label for="mod-concomitante">Técnico Concomitante ao Ensino Médio</label>
+          </div>
+          
+          <div class="radio-option">
+            <input type="radio" id="mod-subsequente" name="modalidade" value="SUBSEQUENTE" />
+            <label for="mod-subsequente">Técnico Subsequente ao Ensino Médio</label>
+          </div>
+          
+          <div class="radio-option">
+            <input type="radio" id="mod-ambos" name="modalidade" value="CONCOMITANTE E/OU SUBSEQUENTE" />
+            <label for="mod-ambos">Técnico Concomitante/Subsequente ao Ensino Médio</label>
+          </div>
+          
+          <div class="radio-option">
+            <input type="radio" id="mod-eja" name="modalidade" value="EDUCAÇÃO DE JOVENS E ADULTOS" />
+            <label for="mod-eja">Técnico Integrado ao Ensino Médio na modalidade de EJA</label>
+          </div>
+          
+          <div class="radio-option">
+            <input type="radio" id="mod-superior" name="modalidade" value="SUPERIOR" />
+            <label for="mod-superior">Curso Superior</label>
+          </div>
+          
+          <div class="radio-option">
+            <input type="radio" id="mod-pos" name="modalidade" value="PÓS-GRADUAÇÃO" />
+            <label for="mod-pos">Pós-graduação</label>
+          </div>
+        </fieldset>
+
+        <div class="form-group">
+          <label for="turno-curso">Turno: <span class="obrigatorio">*</span></label>
+          <select id="turno-curso" name="turno" required aria-required="true">
+            <option value="">-- Selecione o Turno --</option>
+            <option value="Manhã">Manhã</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noite">Noite</option>
+            <option value="Manhã e Tarde">Manhã e Tarde</option>
+            <option value="Tarde e Noite">Tarde e Noite</option>
+            <option value="Manhã ou Tarde">Manhã ou Tarde</option>
+            <option value="Manhã ou Noite">Manhã ou Noite</option>
+            <option value="Tarde ou Noite">Tarde ou Noite</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="semestre-curso">Semestre: <span class="obrigatorio">*</span></label>
+          <input 
+            type="number" 
+            id="semestre-curso" 
+            name="semestre" 
+            required 
+            aria-required="true"
+            placeholder="Digite 1 ou 2"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="campus-curso">Campus (Apenas Leitura):</label>
+          <input 
+            type="text" 
+            id="campus-curso" 
+            name="campus" 
+            readonly 
+            tabindex="-1"
+            class="input-readonly"
+          />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="btn-salvar">Salvar</button>
+          <button type="reset" id="btn-cancelar">Cancelar</button>
+        </div>
+      </form>
+    </main>
+
+    <script>
+      const formCurso = document.getElementById('form-curso');
+      const campoNome = document.getElementById('nome-curso');
+      const campoSemestre = document.getElementById('semestre-curso');
+      const campoCampus = document.getElementById('campus-curso');
+      const campoTurno = document.getElementById('turno-curso');
+
+      // 1. Forçar letras maiúsculas em tempo real no campo Nome
+      campoNome.addEventListener('input', function() {
+        this.value = this.value.toUpperCase();
+      });
+
+      // 2. Capturar ID da URL e carregar dados do Serviço Web
+      window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const idCurso = urlParams.get('cursoSelecionado'); // Pega o name do radio button vindo da página 2
+
+        if (idCurso) {
+          campoCampus.value = "Buscando informações...";
+          const urlAPI = `https://ingresso.ifrs.edu.br/prematricula/ws/pegarCursoIW20242.php?id=${idCurso}`;
+
+          fetch(urlAPI)
+            .then(response => {
+              if (!response.ok) throw new Error('Erro ao buscar curso.');
+              return response.json();
+            })
+            .then(data => {
+              // Verifica se a API retornou dados válidos
+              if (data && !data.erro) {
+                // Preenche os campos de texto e select de acordo com as chaves do JSON
+                campoNome.value = (data.nome || data.curso || '').toUpperCase();
+                campoCampus.value = data.campus || 'IFRS - Campus Padrão';
+                campoTurno.value = data.turno || '';
+                campoSemestre.value = data.semestre || '1';
+
+                // Preenche o Radio Button da modalidade correspondente
+                if (data.modalidade) {
+                  const radioCorrespondente = document.querySelector(`input[name="modalidade"][value="${data.modalidade}"]`);
+                  if (radioCorrespondente) {
+                    radioCorrespondente.checked = true;
+                  }
+                }
+              } else {
+                campoCampus.value = "Curso não localizado no servidor.";
+              }
+            })
+            .catch(error => {
+              console.error(error);
+              campoCampus.value = "Erro ao conectar com o servidor IFRS.";
+            });
+        } else {
+          campoCampus.value = "Nenhum curso selecionado para edição.";
+        }
+      });
+
+      // 3. Validações adicionais em JavaScript ao clicar em Salvar (Submit)
+      formCurso.addEventListener('submit', function(event) {
+        const valorSemestre = parseInt(campoSemestre.value.trim(), 10);
+
+        // Validação estrita do semestre (Apenas 1 ou 2)
+        if (valorSemestre !== 1 && valorSemestre !== 2) {
+          event.preventDefault(); // Impede o envio
+          alert('Erro de Digitação: O campo Semestre aceita exclusivamente o valor 1 ou 2.');
+          campoSemestre.focus();
+          return;
+        }
+
+        // Validação secundária caso o HTML5 falhe nas maiúsculas
+        campoNome.value = campoNome.value.toUpperCase();
+      });
+    </script>
+  </body>
+</html>

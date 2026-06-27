@@ -1,0 +1,41 @@
+#banner {
+    position: absolute;
+    left: 10%;   /* right */
+    top: 0px;
+    width: 80%;
+    height: 100px;
+    border: #000000 solid 3px;
+}
+
+#conteudo {
+    position: absolute;
+    left: 10%;   /* right */
+    top: 100px;
+    width: 80%;
+    height: 300px;
+    border: #000000 solid 3px;
+}
+
+#titulo1 {
+    position: absolute;
+    left: 0%;   /* right */
+    top: 0px;
+    width: 33%;
+    border: #000000 solid 3px;
+}
+
+#titulo2 {
+    position: absolute;
+    left: 33%;   /* right */
+    top: 0px;
+    width: 33%;
+    border: #000000 solid 3px;
+}
+
+#titulo3 {
+    position: absolute;
+    left: 66%;   /* right */
+    top: 0px;
+    width: 34%;
+    border: #000000 solid 3px;
+}

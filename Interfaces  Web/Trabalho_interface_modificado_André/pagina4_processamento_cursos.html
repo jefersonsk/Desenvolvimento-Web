@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instituto Aragão - Processamento do Curso</title>
+    <link rel="stylesheet" href="estilo.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo-container">
+        <img src="icone.png" alt="Ícone do Instituto" />
+        <span class="logo-text">Instituto Aragão de Ensino Superior</span>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#sobre">Sobre o Instituto</a></li>
+          <li><a href="cursos.html" class="active">Cursos</a></li>
+          <li><a href="#estudante">Estudante</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <header class="banner-principal">
+  <div class="banner-overlay"></div>
+  <h1 class="banner-titulo">Instituto Aragão de Ensino Superior</h1>
+</header>
+
+    <main class="content-container">
+      <h1 class="titulo-institucional">Status do Processamento</h1>
+
+      <div class="processing-container">
+        
+        <div id="mensagem-processamento">
+          <p class="msg-erro">Nenhum dado foi enviado para processamento.</p>
+        </div>
+
+        <div class="actions-container">
+          <a href="cursos.html" id="btn-voltar-pesquisa">Voltar para Pesquisa de Cursos</a>
+        </div>
+
+      </div>
+    </main>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const containerMensagem = document.getElementById('mensagem-processamento');
+        
+        // Simulação do resultado do processamento.
+        // Em um cenário real integrado ao backend (ex: PHP), essa lógica seria substituída
+        // pelas variáveis do servidor. Aqui, simulamos o sucesso da validação vinda do formulário anterior.
+        const processamentoComSucesso = true; 
+
+        if (processamentoComSucesso) {
+          containerMensagem.innerHTML = `
+            <p class="msg-sucesso">
+              <strong>Sucesso!</strong> O curso foi processado e salvo no sistema do Instituto Aragão com sucesso.
+            </p>
+          `;
+        } else {
+          containerMensagem.innerHTML = `
+            <p class="msg-falha">
+              <strong>Falha no Processamento:</strong> Não foi possível salvar os dados do curso. Verifique os campos e tente novamente.
+            </p>
+          `;
+        }
+      });
+    </script>
+  </body>
+</html>

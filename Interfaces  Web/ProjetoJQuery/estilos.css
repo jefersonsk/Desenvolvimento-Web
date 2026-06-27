@@ -1,0 +1,15 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#quadro {
+    border: 2px dotted #0000FF;
+    background-color: #00FF00;
+    padding: 20px;
+}
+
+#erros {
+    color: #FF0000;
+}
