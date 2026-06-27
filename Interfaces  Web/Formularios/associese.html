@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <title>Imortal Tricolor</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="estilos.css" type="text/css" rel="stylesheet">
+        <script src="scripts.js" language="javascript"></script>
+    </head>
+    <body>
+        <div id="principal">
+            <header id="banner">
+                Cabeçalho
+            </header>
+            <main id="conteudo">
+                <nav id="menu">
+                    <ul>
+                        <li><a href="index.html">O Clube</a></li>
+                        <li><a href="governanca.html">Governança</a></li>
+                        <li><a href="futebol.html">Futebol</a></li>
+                        <li><a href="competicoes.html">Competições</a></li>
+                        <li><a href="associese.html">Associe-se</a></li>
+                    </ul>
+                </nav>
+                <section id="noticia">
+                    <h1 onclick="alert('Evento TEste')">Cadastre-se</h1>
+                    <hr>
+                    <ol id="erros"></ol><br>
+                    <form action="processamento.php" method="get" enctype="multipart/form-data" onsubmit="return validar()">
+                        <label for="cpf">CPF: </label>
+                        <!-- onkeypress="alert('ao pressionar uma tecla')" -->
+                         <!-- minlength="11" --> 
+                        <input type="text" name="cpf" id="cpf" placeholder="Digiete o CPF" size="30" maxlength="14" value="" onkeypress="mascaraCPF(this)"><br><br>
+
+                        <label for="nome">Nome: </label>
+                        <!-- onfocus="alert('ao entrar no campo')" -->
+                        <input type="text" name="nome" id="nome" placeholder="Digiete seu nome" size="50" maxlength="100" minlength="10" ><br><br>
+
+                        <label for="data_nascimento">Data de Nascimento: </label>
+                        <!-- onblur="alert('ao sair no campo')" -->
+                        <input type="date" name="data_nascimento" id="data_nascimento" size="10" ><br><br>
+
+                        <label for="peso">Peso: </label>
+                        <input type="number" name="peso" id="peso" size="10" step="0.01"><br><br>
+
+                        <fieldset>
+                            <legend>Sexo:</legend>
+                            <input type="radio" name="sexo" id="sexof" value="F"><label for="sexof">Feminino</label>
+                            <input type="radio" name="sexo" id="sexom" value="M"><label for="sexom">Masculino</label>
+                        </fieldset>
+                        <br><br>
+
+                        <fieldset>
+                            <legend>Preferências:</legend>
+                            <input type="checkbox" name="preferencias" id="preff" value="F"><label for="preff">Futebol</label>
+                            <input type="checkbox" name="preferencias" id="prefb" value="B"><label for="prefb">Basquete</label>
+                            <input type="checkbox" name="preferencias" id="prefv" value="V"><label for=prefv">Vôlei</label>
+                        </fieldset>
+                        <br><br>
+
+                        <label for="estado">Estado:</label>
+                        <select name="estado" id="estado" onchange="alert('ao mudar o valor')"><!-- acrescentar a propriedade multiple para criar o campo para múltiplas seleções -->
+                            <option value="">-- Selecione um Estado --</option>
+                            <option value="PR">Paraná</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="SC">Santa Catarina</option>
+                        </select><br><br>
+
+                        <label for="observacoes">Observações:</label><br>
+                        <textarea name="observacoes" id="observacoes" rows="5" cols="50"></textarea><br><br>
+
+                        <label for="foto">Foto:</label>
+                        <input type="file" name="foto" id="foto" size="30"><br><br>
+
+                        <label for="senha">Senha: </label>
+                        <input type="password" name="senha" id="senha" size="20"><br><br>
+
+                        <input type="submit" ame="acao" id="acao1" value="Salvar">
+                        <input type="button" name="acao" id="acao2" value="Calcular" onclick="validar()">
+                        <input type="reset" name="acao" id="acao3" value="Limpar">
+                    </form>
+                </section>
+                <aside id="jogos">
+                    <h2>Próximos Jogos</h2>
+                    <hr>
+                    <p>Fluminense x Grêmio</p>
+                    <br>
+                    <h2>Último Jogo</h2>
+                    <hr>
+                    <p>Grêmio 3 x 1 Atlético GO</p>
+                    <br>
+                    <button type="button" id="compra" class="btn btn-primary">Ingressos Aqui</button>
+                </aside>
+            </main>
+            <footer id="rodape">
+                <p>GRÊMIO FOOTBALL PORTO ALEGRENSE</p>
+                <p>2002 TODOS OS DIREITOS RESERVADOS</p>
+            </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,163 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    background-color: #387dd6;
+    min-height: 100vh;
+}
+
+#banner {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+#banner img {
+    width: 80%;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /*Ajusta o texto quando o navegador é redimensionado*/
+    align-items: flex-start;
+    width: 80%;
+    background-color: #FFFFFF;
+    flex-grow: 1;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    min-width: 200px;
+    margin-top: 30pt;
+}
+
+nav a {
+    font-family: Verdana;
+    text-decoration: none;
+    text-align: left;
+    color: #FFFFFF;
+    padding: 15px;
+    background-color: #00AAFF;
+    margin-bottom: 8px;
+    border: none;
+    margin-left: 30pt;
+    margin-right: 10pt;
+}
+
+nav a:hover {
+    background-color: #0077B3;
+}
+
+nav h2 {
+    text-align: left;
+    color: #acb4b4;
+    text-decoration: none;
+    font-size: 18pt;
+}
+
+nav p {
+    color: #acb4b4;
+    font-size: 12pt;
+}
+
+section img {
+    width: 333;
+    height: 223;
+}
+
+.imagem-flutuante {
+    float: left;
+    width: 320px;
+    margin-right: 15px;
+    margin-bottom: 5px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #acb4b4;
+    width: 100%;
+    margin: 5px 0;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #FFFFFF;
+    background-color: #000000;
+    width: 80%;
+}
+
+footer p {
+    font-family: 'Courier New';
+    font-size: 11pt;
+    margin-top: 6pt;
+    margin-bottom: 5pt;
+    margin-left: 15pt;
+    font-weight: bold;
+}
+
+footer img{
+    padding-top: 10pt;
+    padding-bottom: 10pt;
+    margin-left: 50pt;
+    width: 3%;
+}
+
+h1 {
+    font-family: Verdana;
+    font-size: 20pt;
+    text-decoration: underline;
+    color: #0000FF;
+}
+
+h2 {
+    font-family: Verdana;
+    font-size: 16pt;
+    color: #0000FF;
+}
+
+p {
+    font-family: Verdana;
+    font-size: 13pt;
+    text-align: justify;
+    margin-top: 0;
+}
+
+.jogos {
+    padding: 0;
+    width: 20%;
+    min-width: 150px;
+}
+
+.ingressos {
+    margin-right: 20%;
+    text-align: center;
+    text-decoration: underline;
+}
+
+li {
+    font-family: Verdana;
+    font-size: 12pt;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 2px solid #0000FF;
+}

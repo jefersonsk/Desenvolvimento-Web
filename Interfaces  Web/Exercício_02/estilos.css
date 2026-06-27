@@ -1,0 +1,63 @@
+/* {Título Principal, fonte verdana, verde, tamanho 20pt, centralizado e sublinhado} */
+
+h1 {
+    font-family: Verdana;
+    font-size: 20pt;
+    text-decoration: underline;
+    text-align: center;
+    color: #119417;
+
+}
+
+/* {Subtítulo, fonte verdana, azul, tamanho 14pt e itálico} */
+
+h2 {
+    font-family: Verdana;
+    font-size: 14pt;
+    font-style: italic;
+    color: #0000FF;
+}
+
+/* {Parágrafo, fonte arial, vermelho, tamanho 12pt e justificado} */
+
+p {
+    font-family: Arial;
+    font-size: 12pt;
+    text-align: justify;
+    color: #ee0707;
+}
+
+/* {Parágrafo, fonte arial, azul, tamanho 14pt e centralizado} */
+
+p.paragrafo_especial {
+    font-size: 14pt;
+    text-align: center;
+    color: #0000FF;
+}
+
+/* {Âncora para a segunda página. Fonte arial, verde, tamanho 14pt, borda azul sólida 3pixeis e fundo cinza} */
+
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    border-color: #0000FF;
+    border-style: solid;
+    border-width: 3px;
+    background-color: #5d5d5e;
+}
+
+/* {Imagem Exemplo1.jpg, com borda pontilhada azul e espaçamento interno de 15px em todas as bordas} */
+
+img {
+    border-style: dotted;
+    border-color: #0000FF;
+    padding: 15px;
+}
+
+/* {Tabela com borda de 1 pixel e duas colunas} */
+
+table, th, td {
+    border-collapse: collapse;
+    border-style: solid;
+    border-width: 1px;
+}

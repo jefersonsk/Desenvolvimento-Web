@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>Exercício 04</title>
+        <meta charset="UTF-8">
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://cdn.datatables.net/2.3.8/js/dataTables.js"></script>
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.3.8/css/dataTables.dataTables.css">
+
+        <script>
+            function carregarTabela() {
+                new DataTable('#example', {
+                    "ajax": {
+                        "url": "https://ensino.ifrs.edu.br/auxilioestudantil/ws/ApiEstudantes.php?nome=&unidade=11",
+                        "type": "GET"
+                    },
+                    "columns": [
+                        { "data": "id" },
+                        { "data": "nome" },
+                        { "data": "cpf" }
+                    ]
+                });
+            }
+        </script>
+    </head>
+    <body onload="carregarTabela()">
+        <table id="example" class="display">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>nome</th>
+                <th>cpf</th>
+            </tr>
+        </thead>
+        </table>
+    </body>
+</html>

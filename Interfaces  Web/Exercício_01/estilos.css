@@ -1,0 +1,51 @@
+
+h1{
+    color: #b90505;
+    font-size: 24pt;
+    text-align: center;
+}
+
+h3 {
+    border-width: 3px; /*Espessura da borda*/
+    border-color: #0000FF; /*Cor da borda*/
+    border-style: solid; /*Estilo da borda*/
+    padding-top: 15px; 
+    padding-left: 15px;
+    padding-bottom: 15px;
+    width: 30%;
+    margin-bottom: 60px;
+    /*heigth*/
+}
+
+h2 {
+    border-width: 3px;
+    font-style: italic; /*colocar a fonte dos H2 em itálico*/
+    text-decoration: underline /*colocar texto sublinhado*/;
+    font-size: 12pt;
+}
+
+/*Pode colocar duas marcações dentro de uma configuração CSS*/
+p, li {
+    font-family: "Verdana"; /*Tipo da fonte*/
+    font-size: 14pt;
+    color: #1c7e1c; /*Cor do text*/
+    text-align: justify; /*Alinhamento do texto*/
+    text-indent: 1.5cm; /*Identação do texto, tabulação do início do parágrafo*/
+}
+
+/* li {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    color: #581e07;
+} */
+
+/*Classe específica para parágrafos*/
+p.nome_da_classe{
+    color: #36042e;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+/*Classe genérica que pode ser usado em qualquer marcação*/
+.outra_classe{
+    font-size: 16pt;
+}

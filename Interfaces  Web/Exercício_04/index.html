@@ -1,0 +1,56 @@
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Exercício_04</title>
+        <link href="estilos.css" rel="stylesheet" type="text/css">
+        <script src="scripts.js" language="javascript"></script>
+    </head>
+
+    <body>
+
+        <div class="alinhamento_formulario">
+            <h1 class="titulo_cadastro">Cadastro de Times</h1>
+            <ul id="erros"></ul>
+
+            <form action="processamento.py" method="get" enctype="multipart/form-data" onsubmit="return validar()">
+                <div class="grupo_campo">
+                    <label for="sigla">SIGLA: </label>
+                    <input type="text" name="sigla" id="sigla" placeholder="Digite a sigla do clube..."><br><br><br>
+                </div>
+
+                <div class="grupo_campo">
+                    <label for="nome_clube">NOME DO CLUBE: </label>
+                    <input type="text" name="nome_clube" id="nome_clube" placeholder="Digite o nome do clube..."><br><br><br>
+                </div>
+
+                <div class="grupo_campo">
+                    <label for="data_fundacao">DATA DE FUNDAÇÃO: </label>
+                    <input type="date" name="data_fundacao" id="data_fundacao"><br><br><br>
+                </div>
+
+                <div class="grupo_campo">
+                    <label for="estado">ESTADO: </label>
+                    <select name="estado" id="estado">
+                        <option value="">-- Selecione um estado --</option>
+                        <option value="PR">Paraná</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="SC">Santa Catarina</option>
+                    </select><br><br><br>
+                </div>
+
+                <div class="area_botoes">
+
+                    <input type="submit" name="acao_submit" id="acao_submit" value="Salvar"">
+                    <input type="reset" name="acao_reset" id="acao_reset" value="Limpar">
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+    </body>
+
+</html>

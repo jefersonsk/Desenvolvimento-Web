@@ -1,0 +1,302 @@
+/* --- Reset básico --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #f4f6f9;
+}
+
+/* --- Estilos do Header (Mantido anterior) --- */
+.main-header {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  color: #0056b3;
+}
+
+.logo-container img {
+  max-width: 70px;
+  height: auto;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #4a4a4a;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+  color: #0056b3;
+}
+
+/* ==========================
+   BANNER PRINCIPAL
+========================== */
+
+/* O contêiner principal do banner */
+.banner-principal {
+  position: relative; /* Base para posicionar a imagem e o texto por cima */
+  width: 100%;
+  height: 60vh; /* O banner vai ocupar 60% da altura da tela (você pode ajustar este valor) */
+  display: flex;
+  align-items: center; /* Centraliza o texto verticalmente */
+  justify-content: center; /* Centraliza o texto horizontalmente */
+  overflow: hidden; /* Evita que a imagem crie barras de rolagem caso seja muito grande */
+}
+
+/* A imagem esticada preenchendo todo o banner */
+.banner-imagem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Faz a imagem preencher o espaço sem amassar ou distorcer */
+  z-index: 1; /* Fica no fundo (camada 1) */
+}
+
+/* A película escura para garantir a leitura do texto */
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de transparência */
+  z-index: 2; /* Fica no meio, acima da imagem e abaixo do texto (camada 2) */
+}
+
+/* O texto sobre a imagem */
+.banner-titulo {
+  position: relative;
+  z-index: 3; /* Fica no topo (camada 3) */
+  color: #ffffff; /* Cor branca para contraste com a película escura */
+  font-size: 4rem; /* Tamanho do título (ajuste conforme necessário) */
+  text-align: center;
+  margin: 0;
+  padding: 0 20px; /* Evita que o texto encoste nas bordas em celulares */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); /* Sombra preta extra nas letras */
+  font-family: sans-serif; /* Altere para a fonte do seu projeto */
+}
+
+/* ==========================
+   CONTAINER PRINCIPAL
+========================== */
+.content-container {
+  max-width: 1150px;
+  margin: 60px auto;
+  padding: 0 30px;
+}
+
+/* ==========================
+   TÍTULO
+========================== */
+.content-container h1 {
+  color: #0b3b75;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 40px 0 50px;
+  letter-spacing: -1px;
+  position: relative;
+}
+
+/* Linha decorativa premium */
+.content-container h1::after {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 4px;
+  margin-top: 18px;
+  background: linear-gradient(90deg, #0b3b75, #2f7de1);
+  border-radius: 50px;
+}
+
+/* ==========================
+   PARÁGRAFOS
+========================== */
+.content-container p,
+ul {
+  font-size: 12pt;
+  line-height: 1.9;
+  color: #444;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  text-align: justify;
+  margin-bottom: 24px;
+  letter-spacing: 0.2px;
+}
+
+/* Primeiro parágrafo em destaque */
+.content-container .paragrafo-azul {
+  color: #0b3b75;
+  font-weight: 600;
+  font-size: 12pt;
+  line-height: 1.9;
+  border-left: 4px solid #0b3b75;
+  padding-left: 18px;
+  margin-bottom: 30px;
+  text-align: justify;
+}
+
+/* ==========================
+   IMAGEM ESQUERDA
+========================== */
+.img-esquerda {
+  float: left;
+  max-width: 48%;
+  margin-right: 45px;
+  margin-bottom: 30px;
+
+  border-radius: 16px;
+  overflow: hidden;
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.1),
+    0 5px 15px rgba(0, 0, 0, 0.06);
+
+  transition: all 0.35s ease;
+}
+
+.img-esquerda:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================
+   IMAGEM DIREITA
+========================== */
+
+.img-direita {
+  float: right;
+  max-width: 48%;
+  margin-left: 45px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+
+  border-radius: 16px;
+  overflow: hidden;
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.1),
+    0 5px 15px rgba(0, 0, 0, 0.06);
+
+  transition: all 0.35s ease;
+}
+
+.img-direita:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================
+   IMAGEM CENTRAL
+========================== */
+.img-centro {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.12),
+    0 8px 20px rgba(0, 0, 0, 0.06);
+
+  transition: all 0.4s ease;
+}
+
+.img-centro:hover {
+  transform: scale(1.01);
+}
+
+/* ==========================
+   GALERIA
+========================== */
+.gallery-container {
+  width: 100%;
+  margin: 80px 0;
+  text-align: center;
+}
+
+/* ==========================
+   RESPONSIVO
+========================== */
+@media (max-width: 768px) {
+  .img-esquerda {
+    float: none;
+    display: block;
+    max-width: 100%;
+    margin: 0 auto 30px;
+  }
+
+  .content-container {
+    padding: 0 20px;
+  }
+
+  .content-container h1 {
+    font-size: 2.2rem;
+  }
+
+  .content-container p,
+  .content-container .paragrafo-azul {
+    font-size: 1rem;
+  }
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+  .main-header {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 5%;
+  }
+
+  .main-nav ul {
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .img-centro {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%; /* Garante que a imagem não ultrapasse a tela do celular */
+    height: auto;
+  }
+}

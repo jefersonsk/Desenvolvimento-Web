@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial;
+    margin: 0;
+}
+
+#principal {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    border: 1px solid #000;
+	justify-content: space-between;
+}
+
+#cabecalho {
+    text-align: center;
+    background: #0000FF;
+    color: white;
+    width: 100%;
+}
+
+#banner {
+    text-align: center;
+    background: #0000FF;
+    color: white;
+    width: 100%;
+}
+
+#menu {
+    display: flex;
+    flex-direction: row;
+    background-color: #333;
+    width: 100%;
+}
+
+#menu a,li {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: center;
+}
+
+#menu a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+#conteudo {  
+    font-family: 'Lucida Sans';
+    text-align: justify;
+    padding: 20px;
+    background-color: white;
+    border-style: dotted;
+    border-color: #0000FF;
+    border-width: 3px;
+    width: 50%;
+}
+
+#rodape {
+    width: 100%;
+    padding: 10px;
+    background: #FF0000;
+    color: #FFFFFF;
+}
+
+#rodape p {
+    font-size: 10pt;
+}
+
+#endereco {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.linhaimpar {
+	background-color: #eee;
+}
+
+h2 {
+    color: #0000FF;
+    font-size: 20pt;
+}
+
+/* Layout Responsivo - para telas de celulares. */
+@media screen and (max-width: 700px) {
+  #menu {   
+    flex-direction: column;
+  }
+}
+
+label {
+    font-family: 'Courier New';
+    font-size: 14pt;
+    text-decoration: underline;
+    font-weight: bold;
+    color: #0fe04e;
+}
